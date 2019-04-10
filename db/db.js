@@ -9,14 +9,14 @@ mongoose.connect('mongodb://localhost:27017/mlb', (err) => {
     }
 });
 
-const db = mongoose.connection();
+const db = mongoose.connection;
 
 const gameSchema = new mongoose.Schema({
     homeTeam : {
       abbr : String,
       runs : Number,
       hits : Number,
-      errors : Number,
+      fieldingErrors : Number,
       so: Number,
       abs: Number,
       bbs: Number,
@@ -26,7 +26,7 @@ const gameSchema = new mongoose.Schema({
         abbr: String,
         runs : Number,
         hits : Number,
-        errors : Number,
+        fieldingErrors : Number,
         so: Number,
         abs: Number,
         bbs: Number,
@@ -42,7 +42,7 @@ const teamSchema = new mongoose.Schema({
     abbr: String,
     runs : Number,
     hits : Number,
-    errors : Number,
+    fieldingErrors : Number,
     so: Number,
     abs: Number,
     bbs: Number,
@@ -64,13 +64,13 @@ const Team = mongoose.model('Team', teamSchema);
 
 const addGame = function(game) {
     console.log('inserting game...');
-    Game.findByIdAndUpdate(
+    return Game.findOneAndUpdate(
         {}, {
         homeTeam : {
             abbr : game.homeTeam.abbr,
             runs : game.homeTeam.runs,
             hits : game.homeTeam.hits,
-            errors : game.homeTeam.errors,
+            fieldingErrors : game.homeTeam.errors,
             so: game.homeTeam.so,
             abs: game.homeTeam.abs,
             bbs: game.homeTeam.bbs,
@@ -80,7 +80,7 @@ const addGame = function(game) {
             abbr : game.awayTeam.abbr,
             runs : game.awayTeam.runs,
             hits : game.awayTeam.hits,
-            errors : game.awayTeam.errors,
+            fieldingErrors : game.awayTeam.errors,
             so: game.awayTeam.so,
             abs: game.awayTeam.abs,
             bbs: game.awayTeam.bbs,
@@ -94,12 +94,13 @@ const addGame = function(game) {
 };
 
 const updateTeam = function(name, stats) {
-    Team.findOneAndUpdate(
-        {abbr : name}, 
+    return Team.findOneAndUpdate(
+        {}, 
         {
+        abbr : name,
         runs : stats.runs,
         hits : stats.hits,
-        errors : stats.errors,
+        fieldingErrors : stats.errors,
         so: stats.so,
         abs: stats.abs,
         bbs: stats.bbs,
