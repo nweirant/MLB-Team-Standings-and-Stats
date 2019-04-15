@@ -1,4 +1,6 @@
-module.exports = teams = [
+// http://www.convertcsv.com/csv-to-json.htm
+// last update : 4/15 10:45AM
+module.exports.teams = [
     {
       "RK": 1,
       "Team": "Los Angeles Dodgers",
