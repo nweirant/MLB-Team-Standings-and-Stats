@@ -1,4 +1,4 @@
-module.exports.teams = [
+module.exports.teamRecords = [
     {
       "Rk": 1,
       "Tm": "TBR",

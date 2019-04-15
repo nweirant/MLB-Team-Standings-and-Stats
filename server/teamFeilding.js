@@ -1,4 +1,4 @@
-module.exports.teams = [
+module.exports.teamFeilding = [
     {
       "RK": 1,
       "Team": "Kansas City Royals",

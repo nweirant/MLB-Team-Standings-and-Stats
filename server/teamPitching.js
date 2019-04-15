@@ -1,6 +1,6 @@
 // https://www.baseball-reference.com/leagues/MLB-standings.shtml
 
-module.exports.teams = [
+module.exports.teamPitching = [
   {
     "RK": 1,
     "Team": "Baltimore Orioles",

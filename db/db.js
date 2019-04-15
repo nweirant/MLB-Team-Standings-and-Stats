@@ -11,115 +11,94 @@ mongoose.connect('mongodb://localhost:27017/mlb', (err) => {
 
 const db = mongoose.connection;
 
-const gameSchema = new mongoose.Schema({
-    homeTeam : {
-      abbr : String,
-      runs : Number,
-      hits : Number,
-      fieldingErrors : Number,
-      so: Number,
-      abs: Number,
-      bbs: Number,
-      hrs: Number
-    },
-    awayTeam : {
-        abbr: String,
-        runs : Number,
-        hits : Number,
-        fieldingErrors : Number,
-        so: Number,
-        abs: Number,
-        bbs: Number,
-        hrs: Number
-      },
-    winner: String,
-    score : String,
-    inningsPlayed : Number
+const feildingSchema = new mongoose.Schema({
+    "RK": Number,
+    "Team": String,
+    "League": String,
+    "G": Number,
+    "GS": Number,
+    "INN": Number,
+    "TC": Number,
+    "PO": Number,
+    "A": Number,
+    "E": Number,
+    "DP": Number,
+    "SB": Number,
+    "CS": Number,
+    "SBPCT": Number,
+    "PB": Number,
+    "C_WP": Number,
+    "FPCT": Number,
+    "DER": Number
 });
 
 
-const teamSchema = new mongoose.Schema({
-    abbr: String,
-    runs : Number,
-    hits : Number,
-    fieldingErrors : Number,
-    so: Number,
-    abs: Number,
-    bbs: Number,
-    hrs: Number,
-    games : Array,
-    gamesPlayed : Number,
-    wins : Number,
-    losses : Number,
-    homeWins : Number,
-    homeLosses : Number,
-    awayWins : Number,
-    awayLossts : Number,
-    divisionWins : Number,
-    divisionLosses : Number
+const hittingSchema = new mongoose.Schema({
+    "RK": Number,
+    "Team": String,
+    "League": String,
+    "G": Number,
+    "AB": Number,
+    "R": Number,
+    "H": Number,
+    "2B": Number,
+    "3B": Number,
+    "HR": Number,
+    "RBI": Number,
+    "BB": Number,
+    "SO": Number,
+    "SB": Number,
+    "CS": Number,
+    "AVG": Number,
+    "OBP": Number,
+    "SLG": Number,
+    "OPS": Number
 });
 
-const Game = mongoose.model('Game', gameSchema);
-const Team = mongoose.model('Team', teamSchema);
+const pitchingSchema = new mongoose.Schema({
+    "RK": Number,
+    "Team": String,
+    "League": String,
+    "W": Number,
+    "L": Number,
+    "ERA": Number,
+    "G": Number,
+    "GS": Number,
+    "SV": Number,
+    "SVO": Number,
+    "IP": Number,
+    "H": Number,
+    "R": Number,
+    "ER": Number,
+    "HR": Number,
+    "BB": Number,
+    "SO": Number,
+    "AVG": Number,
+    "WHIP": Number
+});
 
-const addGame = function(game) {
-    console.log('inserting game...');
-    return Game.findOneAndUpdate(
-        {}, {
-        homeTeam : {
-            abbr : game.homeTeam.abbr,
-            runs : game.homeTeam.runs,
-            hits : game.homeTeam.hits,
-            fieldingErrors : game.homeTeam.errors,
-            so: game.homeTeam.so,
-            abs: game.homeTeam.abs,
-            bbs: game.homeTeam.bbs,
-            hrs: game.homeTeam.hrs
-          },
-          awayTeam : {
-            abbr : game.awayTeam.abbr,
-            runs : game.awayTeam.runs,
-            hits : game.awayTeam.hits,
-            fieldingErrors : game.awayTeam.errors,
-            so: game.awayTeam.so,
-            abs: game.awayTeam.abs,
-            bbs: game.awayTeam.bbs,
-            hrs: game.awayTeam.hrs
-            },
-          winner: game.winner,
-          inningsPlayed : game.inningsPlayed
-    },
-    {upsert : true}
-    ).exec();
-};
+const standingsSchema = new mongoose.Schema({
+    "Rk": Number,
+    "Tm": String,
+    "Lg": String,
+    "G": Number,
+    "W": Number,
+    "L": Number,
+    "Strk": String,
+    "W-L%": Number,
+    "R": Number,
+    "RA": Number,
+    "Rdiff": Number,
+    "Home": String,
+    "Road": String,
+    "last10": String,
+    "last20": String,
+    "last30": String,
+    "≥.500": String,
+    "<.500": String
+});
 
-const updateTeam = function(name, stats) {
-    return Team.findOneAndUpdate(
-        {}, 
-        {
-        abbr : name,
-        runs : stats.runs,
-        hits : stats.hits,
-        fieldingErrors : stats.errors,
-        so: stats.so,
-        abs: stats.abs,
-        bbs: stats.bbs,
-        hrs: stats.hrs,
-        games : stats.games,
-        gamesPlayed : stats.gamesPlayed,
-        wins : stats.wins,
-        losses : stats.losses,
-        homeWins : stats.homeWins,
-        homeLosses : stats.homeLosses,
-        awayWins : stats.awayWins,
-        awayLosses : stats.awayLosses,
-        divisionWins : stats.divisionWins,
-        divisionLosses : stats.divisionLosses
-        },
-        {upsert: true}
-        ).exec();
-}
-
-
-module.exports.updateTeam = updateTeam;
-module.exports.addGame = addGame;
+const Feilding = mongoose.model('Feilding', feildingSchema);
+const Pitching = mongoose.model('Pitching', pitchingSchema);
+const Hitting = mongoose.model('Hitting', hittingSchema);
+const Standings = mongoose.model('Standings', standingsSchema);
