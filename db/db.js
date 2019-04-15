@@ -98,7 +98,7 @@ const standingsSchema = new mongoose.Schema({
     "<.500": String
 });
 
-const Feilding = mongoose.model('Feilding', feildingSchema);
-const Pitching = mongoose.model('Pitching', pitchingSchema);
-const Hitting = mongoose.model('Hitting', hittingSchema);
-const Standings = mongoose.model('Standings', standingsSchema);
+module.exports.Feilding = mongoose.model('Feilding', feildingSchema);
+module.exports.Pitching = mongoose.model('Pitching', pitchingSchema);
+module.exports.Hitting = mongoose.model('Hitting', hittingSchema);
+module.exports.Standings = mongoose.model('Standings', standingsSchema);
