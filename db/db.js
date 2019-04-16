@@ -128,20 +128,20 @@ module.exports.getAllStandings = () => {
 
 module.exports.getTeamStat = (team, statType) => {
     const teamAbbr = {
-        'New York Yankees' : 'NYY', 'Boston Red Sox' : 'BOS', 'Baltimore Orioles' : 'BAL', 'Tampa Bay Rays' : 'TBR', 'Toronto Blue Jays' : 'TOR',
-        'Seattle Mariners' : 'SEA', 'Houston Astros' : 'HOU', 'Los Angeles Angels' : 'LAA', 'Oakland Athletics' : 'OAK', 'Texas Rangers' : 'TEX',
-        'Philadelphia Phillies' : 'PHI', 'Atlanta Braves' : 'ATL', 'New York Mets' : 'NYM', 'Washington Nationals' : 'WSN', 'Miami Marlins' : 'MIA',
-        'Milwaukee Brewers' : 'MIL', 'St. Louis Cardinals' : 'STL', 'Pittsburgh Pirates' : 'PIT', 'Chicago Cubs' : 'CHC', 'Cinncinati Reds' : 'CIN',
-        'San Diego Padres' : 'SDP', 'Los Angeles Dodgers' : 'LAD', 'Arizona Diamondbacks' : 'ARI', 'San Francisco Giants' : 'SFG', 'Colorado Rockies' : 'COL',
-        'Minnesota Twins' : 'MIN', 'Cleveland Indians' : 'CLE', 'Detroit Tigers' : 'DET', 'Chicago Whitesox' : 'CHW', 'Kansas City Royals' : 'KCR'
+        'NYY' : 'New York Yankees', 'BOS' : 'Boston Red Sox', 'BAL' : 'Baltimore Orioles', 'TBR' : 'Tampa Bay Rays', 'TOR' : 'Toronto Blue Jays',
+        'SEA' :'Seattle Mariners',  'HOU' : 'Houston Astros', 'LAA' :'Los Angeles Angels', 'OAK' : 'Oakland Athletics',  'TEX' :'Texas Rangers',
+        'PHI' : 'Philadelphia Phillies',  'ATL' : 'Atlanta Braves',  'NYM' : 'New York Mets',  'WSN' : 'Washington Nationals', 'MIA' : 'Miami Marlins',
+        'MIL' : 'Milwaukee Brewers',  'STL' : 'St. Louis Cardinals',  'PIT' : 'Pittsburgh Pirates',  'CHC' : 'Chicago Cubs', 'CIN' : 'Cinncinati Reds',
+        'SDP' : 'San Diego Padres',  'LAD' : 'Los Angeles Dodgers', 'ARI' : 'Arizona Diamondbacks', 'SFG' : 'San Francisco Giants',  'COL' : 'Colorado Rockies',
+        'MIN' : 'Minnesota Twins',  'CLE' : 'Cleveland Indians', 'DET' : 'Detroit Tigers', 'CHW' : 'Chicago Whitesox', 'KCR' :'Kansas City Royals'
     }
-
-    if (teamAbbr[team]) {
-        team = teamAbbr[team];
+    let abbr = team.toUpperCase();
+    if (teamAbbr[abbr]) {
+        team = teamAbbr[abbr];
     }
 
     console.log(team, statType, 'in func');
-
+    console.log('team:', team);
     if (statType === "pitching") {
         return Pitching.findOne({"Team" : team}).exec();
     }
@@ -152,7 +152,7 @@ module.exports.getTeamStat = (team, statType) => {
         return Feilding.findOne({"Team" : team}).exec();
     }
     else if (statType === "standings") {
-        return Standings.findOne({"Tm" : team}).exec();
+        return Standings.findOne({"Tm" : abbr}).exec();
     }   
 }
 
