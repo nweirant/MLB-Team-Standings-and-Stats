@@ -98,7 +98,65 @@ const standingsSchema = new mongoose.Schema({
     "<.500": String
 });
 
-module.exports.Feilding = mongoose.model('Feilding', feildingSchema);
-module.exports.Pitching = mongoose.model('Pitching', pitchingSchema);
-module.exports.Hitting = mongoose.model('Hitting', hittingSchema);
-module.exports.Standings = mongoose.model('Standings', standingsSchema);
+
+const Feilding = mongoose.model('Feilding', feildingSchema);
+const Pitching = mongoose.model('Pitching', pitchingSchema);
+const Hitting = mongoose.model('Hitting', hittingSchema);
+const Standings = mongoose.model('Standings', standingsSchema);
+
+
+module.exports.getAllPitchingStats = function () {
+    return Pitching.find({}).exec();
+}
+
+module.exports.getAllHittingStats = function () {
+    return Hitting.find({}).exec();
+}
+
+module.exports.getAllFeildingStats = () => {
+    return Feilding.find({}).exec();
+}
+
+module.exports.getAllStandings = () => {
+    return Standings.find({}).exec();
+}
+
+// module.exports.getTeamPitchingStats = (team) => {
+//     return Pitching.findOne({"Team" : team}).exec();
+// }
+
+
+module.exports.getTeamStat = (team, statType) => {
+    const teamAbbr = {
+        'New York Yankees' : 'NYY', 'Boston Red Sox' : 'BOS', 'Baltimore Orioles' : 'BAL', 'Tampa Bay Rays' : 'TBR', 'Toronto Blue Jays' : 'TOR',
+        'Seattle Mariners' : 'SEA', 'Houston Astros' : 'HOU', 'Los Angeles Angels' : 'LAA', 'Oakland Athletics' : 'OAK', 'Texas Rangers' : 'TEX',
+        'Philadelphia Phillies' : 'PHI', 'Atlanta Braves' : 'ATL', 'New York Mets' : 'NYM', 'Washington Nationals' : 'WSN', 'Miami Marlins' : 'MIA',
+        'Milwaukee Brewers' : 'MIL', 'St. Louis Cardinals' : 'STL', 'Pittsburgh Pirates' : 'PIT', 'Chicago Cubs' : 'CHC', 'Cinncinati Reds' : 'CIN',
+        'San Diego Padres' : 'SDP', 'Los Angeles Dodgers' : 'LAD', 'Arizona Diamondbacks' : 'ARI', 'San Francisco Giants' : 'SFG', 'Colorado Rockies' : 'COL',
+        'Minnesota Twins' : 'MIN', 'Cleveland Indians' : 'CLE', 'Detroit Tigers' : 'DET', 'Chicago Whitesox' : 'CHW', 'Kansas City Royals' : 'KCR'
+    }
+
+    if (teamAbbr[team]) {
+        team = teamAbbr[team];
+    }
+
+    console.log(team, statType, 'in func');
+
+    if (statType === "pitching") {
+        return Pitching.findOne({"Team" : team}).exec();
+    }
+    else if (statType === "hitting") {
+        return Hitting.findOne({"Team" : team}).exec();
+    }
+    else if (statType === "fielding") {
+        return Feilding.findOne({"Team" : team}).exec();
+    }
+    else if (statType === "standings") {
+        return Standings.findOne({"Tm" : team}).exec();
+    }   
+}
+
+module.exports.Hitting = Hitting;
+module.exports.Feilding = Feilding;
+module.exports.Pitching = Pitching;
+module.exports.Standings = Standings;
