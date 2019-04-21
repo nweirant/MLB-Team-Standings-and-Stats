@@ -38,7 +38,7 @@ function updateHitting() {
     hittingStats.forEach(team => {
         Hitting.findOneAndUpdate({"Team" : team["Team"]}, {
             "Team": team["Team"],
-            "League": team["Leauge"],
+            "League": team["League"],
             "G": team["G"],
             "AB": team["AB"],
             "R": team["R"],
@@ -107,7 +107,7 @@ function updateStandings() {
 }
 
 
-// updatePitching();
-// updateHitting();
-// updateFeilding();
-updateStandings();
+//updatePitching();
+updateHitting();
+//updateFeilding();
+//updateStandings();

@@ -5,6 +5,7 @@ const getAllFielding = require('../db/db').getAllFeildingStats;
 const getAllPitching = require('../db/db').getAllPitchingStats;
 const getAllStandings = require('../db/db').getAllStandings;
 const getTeamStat = require('../db/db').getTeamStat;
+const getLeagueStats = require('../db/db').getLeagueStats;
 const app = express();
 
 app.use(express.static(__dirname + '/../public/'));
@@ -42,10 +43,19 @@ app.get('/api/:team/:stat', (req,res) => {
 
     getTeamStat(team,stat)
     .then(data => {
-        console.log(data);
         res.send(data);
     })
 })
+
+app.get('/api/leauge/:leauge/:stat', (req,res) => {
+    let stat = req.params.stat;
+    let leauge = req.params.leauge;
+
+    getLeagueStats(leauge, stat)
+    .then(data => {
+        res.send(data);
+    })
+});
 
 
 app.listen(3000, () => {

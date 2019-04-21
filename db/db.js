@@ -121,10 +121,21 @@ module.exports.getAllStandings = () => {
     return Standings.find({}).exec();
 }
 
-// module.exports.getTeamPitchingStats = (team) => {
-//     return Pitching.findOne({"Team" : team}).exec();
-// }
-
+module.exports.getLeagueStats = (leauge, stat) => {
+    leauge = leauge.toUpperCase();
+    stat = stat.toLowerCase();
+    switch(stat) {
+        case "hitting" :
+        console.log('hit');
+            return Hitting.find({"League" : leauge});
+        case "feilding" :
+            return Feilding.find({"League" : leauge});
+        case "pitching" :
+            return Pitching.find({"League" : leauge});
+        case "standings" : 
+            return Standings.find({"Lg" : leauge});
+    }
+}
 
 module.exports.getTeamStat = (team, statType) => {
     const teamAbbr = {
@@ -139,9 +150,6 @@ module.exports.getTeamStat = (team, statType) => {
     if (teamAbbr[abbr]) {
         team = teamAbbr[abbr];
     }
-
-    console.log(team, statType, 'in func');
-    console.log('team:', team);
     if (statType === "pitching") {
         return Pitching.findOne({"Team" : team}).exec();
     }
