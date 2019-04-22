@@ -63,8 +63,10 @@ app.get('/api/division/:division/:stat' , (req,res) => {
     .then(data => {
         res.send(data);
     })
-
 })
+
+
+
 app.listen(3000, () => {
     console.log('listining to port 3000');
 })

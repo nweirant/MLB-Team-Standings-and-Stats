@@ -118,8 +118,12 @@ function updateStandings() {
     })
 }
 
-
-updatePitching();
-updateHitting();
-updateFeilding();
-updateStandings();
+updateData = async() => {
+    await updatePitching();
+    await updateHitting();
+    await updateFeilding();
+    await updateStandings();
+    console.log('updated!');
+}
+module.exports.updateData = updateData;
+updateData();

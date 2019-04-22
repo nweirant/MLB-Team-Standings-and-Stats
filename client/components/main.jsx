@@ -1,6 +1,6 @@
 import React from 'react';
-import AddGame from './addGame.jsx';
-// // import axios from 'axios';
+import Standings from './standings.jsx';
+// import axios from 'axios';
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -11,6 +11,7 @@ export default class Main extends React.Component {
         return (
             <div>
                 Main
+                <Standings />
             </div>
         )
     }
