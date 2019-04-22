@@ -6,6 +6,7 @@ const getAllPitching = require('../db/db').getAllPitchingStats;
 const getAllStandings = require('../db/db').getAllStandings;
 const getTeamStat = require('../db/db').getTeamStat;
 const getLeagueStats = require('../db/db').getLeagueStats;
+const getDivisionStats = require('../db/db').getDivisionStats;
 const app = express();
 
 app.use(express.static(__dirname + '/../public/'));
@@ -47,17 +48,23 @@ app.get('/api/:team/:stat', (req,res) => {
     })
 })
 
-app.get('/api/leauge/:leauge/:stat', (req,res) => {
+app.get('/api/leauge/:league/:stat', (req,res) => {
     let stat = req.params.stat;
-    let leauge = req.params.leauge;
+    let league = req.params.league;
 
-    getLeagueStats(leauge, stat)
+    getLeagueStats(league, stat)
     .then(data => {
         res.send(data);
     })
 });
 
+app.get('/api/division/:division/:stat' , (req,res) => {
+    getDivisionStats(req.params.division, req.params.stat)
+    .then(data => {
+        res.send(data);
+    })
 
+})
 app.listen(3000, () => {
     console.log('listining to port 3000');
 })

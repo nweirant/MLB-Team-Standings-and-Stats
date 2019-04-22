@@ -14,6 +14,7 @@ const db = mongoose.connection;
 const feildingSchema = new mongoose.Schema({
     "RK": Number,
     "Team": String,
+    "Division" : String,
     "League": String,
     "G": Number,
     "GS": Number,
@@ -36,6 +37,7 @@ const feildingSchema = new mongoose.Schema({
 const hittingSchema = new mongoose.Schema({
     "RK": Number,
     "Team": String,
+    "Division" : String,
     "League": String,
     "G": Number,
     "AB": Number,
@@ -58,6 +60,7 @@ const hittingSchema = new mongoose.Schema({
 const pitchingSchema = new mongoose.Schema({
     "RK": Number,
     "Team": String,
+    "Division" : String,
     "League": String,
     "W": Number,
     "L": Number,
@@ -80,6 +83,7 @@ const pitchingSchema = new mongoose.Schema({
 const standingsSchema = new mongoose.Schema({
     "Rk": Number,
     "Tm": String,
+    "Division" : String,
     "Lg": String,
     "G": Number,
     "W": Number,
@@ -126,7 +130,6 @@ module.exports.getLeagueStats = (leauge, stat) => {
     stat = stat.toLowerCase();
     switch(stat) {
         case "hitting" :
-        console.log('hit');
             return Hitting.find({"League" : leauge});
         case "feilding" :
             return Feilding.find({"League" : leauge});
@@ -137,12 +140,27 @@ module.exports.getLeagueStats = (leauge, stat) => {
     }
 }
 
+module.exports.getDivisionStats = (division, stat) => {
+    division = division.toUpperCase();
+    stat = stat.toLowerCase();
+    switch(stat) {
+        case "hitting" :
+            return Hitting.find({"Division" : division});
+        case "feilding" :
+            return Feilding.find({"Division" : division});
+        case "pitching" :
+            return Pitching.find({"Division" : division});
+        case "standings" : 
+            return Standings.find({"Division" : division});
+    }
+};
+
 module.exports.getTeamStat = (team, statType) => {
     const teamAbbr = {
         'NYY' : 'New York Yankees', 'BOS' : 'Boston Red Sox', 'BAL' : 'Baltimore Orioles', 'TBR' : 'Tampa Bay Rays', 'TOR' : 'Toronto Blue Jays',
         'SEA' :'Seattle Mariners',  'HOU' : 'Houston Astros', 'LAA' :'Los Angeles Angels', 'OAK' : 'Oakland Athletics',  'TEX' :'Texas Rangers',
         'PHI' : 'Philadelphia Phillies',  'ATL' : 'Atlanta Braves',  'NYM' : 'New York Mets',  'WSN' : 'Washington Nationals', 'MIA' : 'Miami Marlins',
-        'MIL' : 'Milwaukee Brewers',  'STL' : 'St. Louis Cardinals',  'PIT' : 'Pittsburgh Pirates',  'CHC' : 'Chicago Cubs', 'CIN' : 'Cinncinati Reds',
+        'MIL' : 'Milwaukee Brewers',  'STL' : 'St. Louis Cardinals',  'PIT' : 'Pittsburgh Pirates',  'CHC' : 'Chicago Cubs', 'CIN' : 'Cincinnati Reds',
         'SDP' : 'San Diego Padres',  'LAD' : 'Los Angeles Dodgers', 'ARI' : 'Arizona Diamondbacks', 'SFG' : 'San Francisco Giants',  'COL' : 'Colorado Rockies',
         'MIN' : 'Minnesota Twins',  'CLE' : 'Cleveland Indians', 'DET' : 'Detroit Tigers', 'CHW' : 'Chicago Whitesox', 'KCR' :'Kansas City Royals'
     }

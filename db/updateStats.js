@@ -8,12 +8,21 @@ const Hitting = require('./db').Hitting;
 const Feilding = require('./db').Feilding;
 const Standings = require('./db').Standings;
 
+const divisions = {
+    'NYY' : 'ALEAST', 'New York Yankees' : 'ALEAST', 'BOS' : 'ALEAST', 'Boston Red Sox' : 'ALEAST', 'BAL' : 'ALEAST', 'Baltimore Orioles' : 'ALEAST', 'TBR' : 'ALEAST', 'Tampa Bay Rays' : 'ALEAST', 'TOR' : 'ALEAST', 'Toronto Blue Jays' : 'ALEAST',
+    'SEA' : 'ALWEST', 'Seattle Mariners' : 'ALWEST',  'HOU' : 'ALWEST', 'Houston Astros' : 'ALWEST', 'LAA' : 'ALWEST', 'Los Angeles Angels' : 'ALWEST', 'OAK' : 'ALWEST', 'Oakland Athletics' : 'ALWEST',  'TEX' : 'ALWEST', 'Texas Rangers' : 'ALWEST',
+    'PHI' : 'NLEAST', 'Philadelphia Phillies' : 'NLEAST', 'ATL' : 'NLEAST', 'Atlanta Braves' : 'NLEAST', 'NYM' : 'NLEAST', 'New York Mets' : 'NLEAST',  'WSN' : 'NLEAST', 'Washington Nationals': 'NLEAST', 'MIA' : 'NLEAST','Miami Marlins': 'NLEAST',
+    'MIL' : 'NLCENTRAL', 'Milwaukee Brewers' : 'NLCENTRAL',  'STL' : 'NLCENTRAL', 'St. Louis Cardinals': 'NLCENTRAL',  'PIT' : 'NLCENTRAL', 'Pittsburgh Pirates': 'NLCENTRAL',  'CHC' : 'NLCENTRAL', 'Chicago Cubs': 'NLCENTRAL', 'CIN' : 'NLCENTRAL', 'Cincinnati Reds': 'NLCENTRAL',
+    'SDP' : 'NLWEST', 'San Diego Padres' : 'NLWEST',  'LAD'  : 'NLWEST', 'Los Angeles Dodgers'  : 'NLWEST', 'ARI'  : 'NLWEST', 'Arizona Diamondbacks'  : 'NLWEST', 'SFG'  : 'NLWEST', 'San Francisco Giants'  : 'NLWEST',  'COL'  : 'NLWEST', 'Colorado Rockies'  : 'NLWEST',
+    'MIN' : 'ALCENTRAL', 'Minnesota Twins': 'ALCENTRAL',  'CLE' : 'ALCENTRAL', 'Cleveland Indians': 'ALCENTRAL', 'DET' : 'ALCENTRAL', 'Detroit Tigers': 'ALCENTRAL', 'CHW': 'ALCENTRAL', 'Chicago Whitesox': 'ALCENTRAL', 'KCR' : 'ALCENTRAL','Kansas City Royals' : 'ALCENTRAL'
+}
 
 function updatePitching() {
     pitchingStats.forEach(team => {
         Pitching.findOneAndUpdate({ "Team" : team["Team"]}, {
             "Team": team["Team"],
             "League": team["League"],
+            "Division" : divisions[team["Team"]],
             "W": team["W"],
             "L": team["L"],
             "ERA": team["ERA"],
@@ -39,6 +48,7 @@ function updateHitting() {
         Hitting.findOneAndUpdate({"Team" : team["Team"]}, {
             "Team": team["Team"],
             "League": team["League"],
+            "Division" : divisions[team["Team"]],
             "G": team["G"],
             "AB": team["AB"],
             "R": team["R"],
@@ -64,6 +74,7 @@ function updateFeilding() {
         Feilding.findOneAndUpdate({"Team" : team["Team"]}, {
             "Team": team["Team"],
             "League": team["League"],
+            "Division" : divisions[team["Team"]],
             "G": team["G"],
             "GS": team["GS"],
             "INN": team["INN"],
@@ -89,6 +100,7 @@ function updateStandings() {
         Standings.findOneAndUpdate({"Tm" : team["Tm"]}, {
             "Tm": team["Tm"],
             "Lg": team["Lg"],
+            "Division" : divisions[team["Tm"]],
             "G": team["G"],
             "W": team["W"],
             "L": team["L"],
@@ -107,7 +119,7 @@ function updateStandings() {
 }
 
 
-//updatePitching();
+updatePitching();
 updateHitting();
-//updateFeilding();
-//updateStandings();
+updateFeilding();
+updateStandings();
