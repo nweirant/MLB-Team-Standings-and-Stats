@@ -13,7 +13,7 @@ export default class Standings extends React.Component {
             nl_east : [],
             nl_central : [],
             nl_west : [],
-            activeTeam : {}
+            activeTeam : 'NYY'
         }
 
         this.getActiveTeam = this.getActiveTeam.bind(this);
@@ -29,9 +29,7 @@ export default class Standings extends React.Component {
     }
 
     getActiveTeam (e) {
-        e.preventDefault();
-        console.log(e.target.innerHTML);  
-        this.setState({activeTeam: e.target.value});
+        this.setState({activeTeam: e.target.innerHTML});
     }
 
     sortDivisions(allTeams) {

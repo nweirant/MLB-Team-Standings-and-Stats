@@ -42,10 +42,13 @@ app.get('/api/:team/:stat', (req,res) => {
     let stat = req.params.stat;
     let team = req.params.team
 
+  
     getTeamStat(team,stat)
     .then(data => {
         res.send(data);
     })
+    
+
 })
 
 app.get('/api/leauge/:league/:stat', (req,res) => {
