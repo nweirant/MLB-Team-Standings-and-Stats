@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import TeamSummary from './teamSummary.jsx';
 
 export default class Standings extends React.Component {
     constructor(props) {
@@ -11,8 +12,11 @@ export default class Standings extends React.Component {
             al_central : [],
             nl_east : [],
             nl_central : [],
-            nl_west : []
+            nl_west : [],
+            activeTeam : {}
         }
+
+        this.getActiveTeam = this.getActiveTeam.bind(this);
     }
 
     getData() {
@@ -22,6 +26,12 @@ export default class Standings extends React.Component {
                 this.sortDivisions(data.data);
             });
         })        
+    }
+
+    getActiveTeam (e) {
+        e.preventDefault();
+        console.log(e.target.innerHTML);  
+        this.setState({activeTeam: e.target.value});
     }
 
     sortDivisions(allTeams) {
@@ -73,7 +83,10 @@ export default class Standings extends React.Component {
  
     render() {
         return(
-            <div className="row">
+            <div>
+                <div>
+                    <TeamSummary activeTeam={this.state.activeTeam} />
+                </div>
                 <div>
                     <h4>AL EAST</h4>
                     <table>
@@ -81,12 +94,19 @@ export default class Standings extends React.Component {
                         <th>Team</th>
                         <th>W</th>
                         <th>L</th>
+                        <th>Win%</th>
+                        <th>Streak</th>
+
+
                     </tr>
                         {this.state.al_east.map(team => (     
                             <tr>
-                                <td>{team.Tm}</td>
+                                <td onClick={this.getActiveTeam}>{team.Tm}</td>
                                 <td>{team.W}</td>
                                 <td>{team.L}</td>
+                                <td>{team["W-L%"]}</td>
+                                <td>{team.Strk}</td>
+
                             </tr>
 
                         ))}
@@ -100,12 +120,18 @@ export default class Standings extends React.Component {
                         <th>Team</th>
                         <th>W</th>
                         <th>L</th>
+                        <th>Win%</th>
+                        <th>Streak</th>
+
                     </tr>
                         {this.state.al_west.map(team => (     
                             <tr>
-                                <td>{team.Tm}</td>
+                                <td onClick={this.getActiveTeam}>{team.Tm}</td>
                                 <td>{team.W}</td>
                                 <td>{team.L}</td>
+                                <td>{team["W-L%"]}</td>
+                                <td>{team.Strk}</td>
+
                             </tr>
 
                         ))}
@@ -120,12 +146,19 @@ export default class Standings extends React.Component {
                         <th>Team</th>
                         <th>W</th>
                         <th>L</th>
+                        <th>Win%</th>
+                        <th>Streak</th>
+
                     </tr>
                         {this.state.al_central.map(team => (     
                             <tr>
-                                <td>{team.Tm  }</td>
+                                <td onClick={this.getActiveTeam}>{team.Tm}</td>
                                 <td>{team.W}</td>
                                 <td>{team.L}</td>
+                                <td>{team["W-L%"]}</td>
+                                <td>{team.Strk}</td>
+
+
                             </tr>
 
                         ))}
@@ -138,12 +171,18 @@ export default class Standings extends React.Component {
                         <th>Team</th>
                         <th>W</th>
                         <th>L</th>
+                        <th>Win%</th>
+                        <th>Streak</th>
+
                     </tr>
                         {this.state.nl_east.map(team => (     
                             <tr>
-                                <td>{team.Tm  }</td>
+                                <td onClick={this.getActiveTeam}>{team.Tm}</td>
                                 <td>{team.W}</td>
                                 <td>{team.L}</td>
+                                <td>{team["W-L%"]}</td>
+                                <table>{team.Strk}</table>
+
                             </tr>
 
                         ))}
@@ -156,12 +195,19 @@ export default class Standings extends React.Component {
                         <th>Team</th>
                         <th>W</th>
                         <th>L</th>
+                        <th>Win%</th>
+                        <th>Streak</th>
+
                     </tr>
                         {this.state.nl_west.map(team => (     
                             <tr>
-                                <td>{team.Tm  }</td>
+                                <td onClick={this.getActiveTeam}>{team.Tm}</td>
                                 <td>{team.W}</td>
                                 <td>{team.L}</td>
+                                <td>{team["W-L%"]}</td>
+                                <td>{team.Strk}</td>
+
+
                             </tr>
 
                         ))}
@@ -174,12 +220,18 @@ export default class Standings extends React.Component {
                         <th>Team</th>
                         <th>W</th>
                         <th>L</th>
+                        <th>Win%</th>
+                        <th>Streak</th>
+
                     </tr>
                         {this.state.nl_central.map(team => (     
                             <tr>
-                                <td>{team.Tm  }</td>
+                                <td onClick={this.getActiveTeam}>{team.Tm}</td>
                                 <td>{team.W}</td>
                                 <td>{team.L}</td>
+                                <td>{team["W-L%"]}</td>
+                                <td>{team.Strk}</td>
+
                             </tr>
 
                         ))}

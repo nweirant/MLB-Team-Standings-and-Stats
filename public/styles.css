@@ -14,3 +14,11 @@ ul {
 span {
     flex: 0 0 4%;    
 }
+th, td {
+	padding: 4%;
+}
+
+table {
+	margin-left: 2%;
+	padding: 0%;
+}
