@@ -77,7 +77,15 @@ const pitchingSchema = new mongoose.Schema({
     "BB": Number,
     "SO": Number,
     "AVG": Number,
-    "WHIP": Number
+    "WHIP": Number,
+    'ERA League Rank': Number,
+    'ERA MLB Rank': Number,
+    'SV League Rank': Number,
+    'SV MLB Rank': Number,
+    'SO League Rank': Number,
+    'SO MLB Rank': Number,
+    "AVG League Rank": Number,
+    "AVG MLB Rank" : Number
 });
 
 const standingsSchema = new mongoose.Schema({

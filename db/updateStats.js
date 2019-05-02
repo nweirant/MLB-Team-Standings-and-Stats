@@ -1,7 +1,7 @@
-const feildingStats = require('../server/teamFeilding').teamFeilding;
-const hittingStats = require ('../server/teamHitting').teamHitting;
-const pitchingStats = require('../server/teamPitching').teamPitching;
-const standingsStats = require('../server/teamRecords').teamRecords;
+let feildingStats = require('../server/teamFeilding').teamFeilding;
+let hittingStats = require ('../server/teamHitting').teamHitting;
+let pitchingStats = require('../server/teamPitching').teamPitching;
+let standingsStats = require('../server/teamRecords').teamRecords;
 
 const Pitching = require('./db').Pitching;
 const Hitting = require('./db').Hitting;
@@ -17,6 +17,7 @@ const divisions = {
     'MIN' : 'ALCENTRAL', 'Minnesota Twins': 'ALCENTRAL',  'CLE' : 'ALCENTRAL', 'Cleveland Indians': 'ALCENTRAL', 'DET' : 'ALCENTRAL', 'Detroit Tigers': 'ALCENTRAL', 'CHW': 'ALCENTRAL', 'Chicago Whitesox': 'ALCENTRAL', 'KCR' : 'ALCENTRAL','Kansas City Royals' : 'ALCENTRAL'
 }
 
+pitchingStats = getRankings(pitchingStats, ["ERA", "SV", "SO", "AVG"]);
 function updatePitching() {
     pitchingStats.forEach(team => {
         Pitching.findOneAndUpdate({ "Team" : team["Team"]}, {
@@ -38,7 +39,15 @@ function updatePitching() {
             "BB": team["BB"],
             "SO": team["SO"],
             "AVG": team["AVG"],
-            "WHIP": team["WHIP"]
+            "WHIP": team["WHIP"],
+            "ERA League Rank" : team["ERA League Rank"],
+            "ERA MLB Rank" : team["ERA MLB Rank"],
+            "SV League Rank" : team["SV League Rank"],
+            "SV MLB Rank" : team["SV MLB Rank"],
+            "SO League Rank": team["SO League Rank"],
+            "SO MLB Rank" : team["SO MLB Rank"],
+            "AVG League Rank" : team["AVG League Rank"],
+            "AVG MLB Rank" : team["AVG MLB Rank"]
         }, {upsert : true}).exec()
     })
 }
@@ -119,12 +128,10 @@ function updateStandings() {
 }
 
 
-function standingsRankings() {
-    let AL = standingsStats.filter(team => team.Lg === 'AL');
-    let NL = standingsStats.filter(team => team.Lg === 'NL');
-
-    let sortableStats = ["W", "W-L%", "R", "RA", "Rdiff"];
-
+function getRankings(statCategory, sortableStats) {
+    let AL = statCategory.filter(team => team.League === 'AL' || team.Lg === 'AL');
+    let NL = statCategory.filter(team => team.League === 'NL' || team.Lg === 'NL');
+    
     let ALsortedStats = [];
     let NLsortedStats = [];
     let result = [];
@@ -135,18 +142,18 @@ function standingsRankings() {
         NLsortedStats = NL.sort(comp);
 
         ALsortedStats.forEach( (team, i) => {
-            let id = stat + ' AL rank';
+            let id = stat + ' League Rank';
                 team[id] = i + 1;
         })
         NLsortedStats.forEach( (team, i) => {
-            let id = stat + ' NL rank';
+            let id = stat + ' League Rank';
                 team[id] = i + 1;
         })
 
         result = ALsortedStats.concat(NLsortedStats);
         result = result.sort(comp);
         result.forEach( (team, i) => {
-            let id = stat + ' MLB rank';
+            let id = stat + ' MLB Rank';
                 team[id] = i + 1;
         })
     })
@@ -162,8 +169,7 @@ function standingsRankings() {
         }
         return compare;
     }
-
-   console.log(result);
+   return result;
 }
 
 updateData = async() => {
@@ -174,8 +180,8 @@ updateData = async() => {
     console.log('updated!');
 }
 module.exports.updateData = updateData;
-//updateData();
+updateData();
 
-standingsRankings();
-
-
+// const standingRankings = getRankings(standingsStats, ["W", "W-L%", "R", "RA", "Rdiff"]);
+// const hittingRankings = getRankings(hittingStats, ["AB", "R", "H", "AVG", "2B", "HR", "SO", "BB", "OBP", "SB", "RBI", "SLG", "OPS"]);
+// const feildingRankings = getRankings(feildingStats, ["E", "FPCT"]);
