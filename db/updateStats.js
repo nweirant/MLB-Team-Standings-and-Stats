@@ -123,7 +123,7 @@ function updateFeilding() {
             "E MLB Rank" : team["E MLB Rank"],
             "E League Rank" : team["E League Rank"],
             "FPCT League Rank" : team["FPCT League Rank"],
-            "FCPT MLB Rank" : team["FPCT MLB Rank"]
+            "FPCT MLB Rank" : team["FPCT MLB Rank"]
         }, {upsert : true}).exec()
     })
 }

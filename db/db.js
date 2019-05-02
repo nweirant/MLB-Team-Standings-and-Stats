@@ -34,7 +34,7 @@ const feildingSchema = new mongoose.Schema({
     "E MLB Rank" : Number,
     "E League Rank" : Number,
     "FPCT League Rank" : Number,
-    "FCPT MLB Rank" : Number,
+    "FPCT MLB Rank" : Number,
 });
 
 
