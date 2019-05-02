@@ -88,15 +88,19 @@ export default class Standings extends React.Component {
                 </div>
                 <div>
                     <h4>AL EAST</h4>
-                    <table>
+                    <table className="al-table">
                     <tr>
                         <th>Team</th>
                         <th>W</th>
                         <th>L</th>
                         <th>Win%</th>
+                        <th>AL Rank</th>
+                        <th>MLB Rank</th>
                         <th>Streak</th>
                         <th>Last 10</th>
                         <th>Run Diff.</th>
+                        
+
 
 
                     </tr>
@@ -106,6 +110,8 @@ export default class Standings extends React.Component {
                                 <td>{team.W}</td>
                                 <td>{team.L}</td>
                                 <td>{team["W-L%"]}</td>
+                                <td>{team["W-L% League Rank"]}</td>
+                                <td>{team["W-L% MLB Rank"]}</td>
                                 <td>{team.Strk}</td>
                                 <td>{team.last10}</td>
                                 <td>{team.Rdiff}</td>
@@ -118,15 +124,18 @@ export default class Standings extends React.Component {
 
                 <div>
                     <h4>AL WEST</h4>
-                    <table>
+                    <table className="al-table">
                     <tr>
                         <th>Team</th>
                         <th>W</th>
                         <th>L</th>
                         <th>Win%</th>
+                        <th>AL Rank</th>
+                        <th>MLB Rank</th>
                         <th>Streak</th>
                         <th>Last 10</th>
                         <th>Run Diff.</th>
+
 
                     </tr>
                         {this.state.al_west.map(team => (     
@@ -135,6 +144,8 @@ export default class Standings extends React.Component {
                                 <td>{team.W}</td>
                                 <td>{team.L}</td>
                                 <td>{team["W-L%"]}</td>
+                                <td>{team["W-L% League Rank"]}</td>
+                                <td>{team["W-L% MLB Rank"]}</td>
                                 <td>{team.Strk}</td>
                                 <td>{team.last10}</td>
                                 <td>{team.Rdiff}</td>
@@ -148,15 +159,18 @@ export default class Standings extends React.Component {
 
                 <div>
                     <h4>AL CENTRAL</h4>
-                    <table>
+                    <table className="al-table">
                     <tr>
                         <th>Team</th>
                         <th>W</th>
                         <th>L</th>
                         <th>Win%</th>
+                        <th>AL Rank</th>
+                        <th>MLB Rank</th>
                         <th>Streak</th>
                         <th>Last 10</th>
                         <th>Run Diff.</th>
+  
 
                     </tr>
                         {this.state.al_central.map(team => (     
@@ -165,6 +179,8 @@ export default class Standings extends React.Component {
                                 <td>{team.W}</td>
                                 <td>{team.L}</td>
                                 <td>{team["W-L%"]}</td>
+                                <td>{team["W-L% League Rank"]}</td>
+                                <td>{team["W-L% MLB Rank"]}</td>
                                 <td>{team.Strk}</td>
                                 <td>{team.last10}</td>
                                 <td>{team.Rdiff}</td>
@@ -176,15 +192,19 @@ export default class Standings extends React.Component {
                 </div>
                 <div>
                     <h4>NL EAST</h4>
-                    <table>
+                    <table className="nl-table">
                     <tr>
                         <th>Team</th>
                         <th>W</th>
                         <th>L</th>
                         <th>Win%</th>
+                        <th>NL Rank</th>
+                        <th>MLB Rank</th>
                         <th>Streak</th>
                         <th>Last 10</th>
                         <th>Run Diff.</th>
+       
+
 
                     </tr>
                         {this.state.nl_east.map(team => (     
@@ -193,6 +213,8 @@ export default class Standings extends React.Component {
                                 <td>{team.W}</td>
                                 <td>{team.L}</td>
                                 <td>{team["W-L%"]}</td>
+                                <td>{team["W-L% League Rank"]}</td>
+                                <td>{team["W-L% MLB Rank"]}</td>
                                 <td>{team.Strk}</td>
                                 <td>{team.last10}</td>
                                 <td>{team.Rdiff}</td>
@@ -204,15 +226,19 @@ export default class Standings extends React.Component {
                 </div>
                 <div>
                     <h4>NL WEST</h4>
-                    <table>
+                    <table className="nl-table">
                     <tr>
                         <th>Team</th>
                         <th>W</th>
                         <th>L</th>
                         <th>Win%</th>
+                        <th>NL Rank</th>
+                        <th>MLB Rank</th>
                         <th>Streak</th>
                         <th>Last 10</th>
                         <th>Run Diff.</th>
+            
+
 
                     </tr>
                         {this.state.nl_west.map(team => (     
@@ -221,6 +247,8 @@ export default class Standings extends React.Component {
                                 <td>{team.W}</td>
                                 <td>{team.L}</td>
                                 <td>{team["W-L%"]}</td>
+                                <td>{team["W-L% League Rank"]}</td>
+                                <td>{team["W-L% MLB Rank"]}</td>
                                 <td>{team.Strk}</td>
                                 <td>{team.last10}</td>
                                 <td>{team.Rdiff}</td>
@@ -232,15 +260,18 @@ export default class Standings extends React.Component {
                 </div>
                 <div>
                     <h4>NL CENTRAL</h4>
-                    <table>
+                    <table className="nl-table">
                     <tr>
                         <th>Team</th>
                         <th>W</th>
                         <th>L</th>
                         <th>Win%</th>
+                        <th>NL Rank</th>
+                        <th>MLB Rank</th>
                         <th>Streak</th>
                         <th>Last 10</th>
                         <th>Run Diff.</th>
+                        
 
                     </tr>
                         {this.state.nl_central.map(team => (     
@@ -249,6 +280,8 @@ export default class Standings extends React.Component {
                                 <td>{team.W}</td>
                                 <td>{team.L}</td>
                                 <td>{team["W-L%"]}</td>
+                                <td>{team["W-L% League Rank"]}</td>
+                                <td>{team["W-L% MLB Rank"]}</td>
                                 <td>{team.Strk}</td>
                                 <td>{team.last10}</td>
                                 <td>{team.Rdiff}</td>

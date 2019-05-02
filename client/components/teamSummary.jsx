@@ -18,7 +18,7 @@ export default class TeamSummary extends React.Component {
         .then(data => {
             this.setState({hitting: data.data});
         })
-        axios.get(`/api/${this.props/activeTeam}/pitching`)
+        axios.get(`/api/${this.props.activeTeam}/pitching`)
         .then(data => {
              this.setState({pitching : data})
         })

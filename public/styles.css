@@ -4,7 +4,6 @@ table {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-	border: 1px solid black;
 	display: flex; /* nav bar!*/
 	flex-direction: column;
 	justify-content: flex-start;
@@ -12,9 +11,17 @@ table {
 	/* align-items: flex-start; */
 }
 
+.al-table {
+	border: 1px solid red;
+}
+.nl-table {
+	border: 1px solid blue;
+}
+
 th, tr, td {
 	display: flex;
 	flex: 0 0 10%;
 } 
+
 
 
