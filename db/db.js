@@ -30,7 +30,11 @@ const feildingSchema = new mongoose.Schema({
     "PB": Number,
     "C_WP": Number,
     "FPCT": Number,
-    "DER": Number
+    "DER": Number,
+    "E MLB Rank" : Number,
+    "E League Rank" : Number,
+    "FPCT League Rank" : Number,
+    "FCPT MLB Rank" : Number,
 });
 
 
@@ -54,7 +58,23 @@ const hittingSchema = new mongoose.Schema({
     "AVG": Number,
     "OBP": Number,
     "SLG": Number,
-    "OPS": Number
+    "OPS": Number,
+    "R League Rank" : Number,
+    "R MLB Rank": Number,
+    "AVG MLB Rank": Number,
+    "AVG League Rank": Number,
+    "HR MLB Rank": Number,
+    "HR League Rank": Number,
+    "SO MLB Rank": Number,
+    "SO League Rank": Number,
+    "OBP MLB Rank": Number,
+    "OBP League Rank": Number,
+    "SB League Rank": Number,
+    "SB MLB Rank": Number,
+    "SLG MLB Rank": Number,
+    "SLG League Rank": Number,
+    "OPS League Rank": Number,
+    "OPS MLB Rank": Number
 });
 
 const pitchingSchema = new mongoose.Schema({
@@ -107,7 +127,17 @@ const standingsSchema = new mongoose.Schema({
     "last20": String,
     "last30": String,
     "≥.500": String,
-    "<.500": String
+    "<.500": String,
+    "W League Rank": Number,
+    "W MLB Rank": Number,
+    "W-L% MLB Rank": Number,
+    "W-L% League Rank": Number,
+    "R League Rank": Number,
+    "R MLB Rank": Number,
+    "RA MLB Rank": Number,
+    "RA League Rank": Number,
+    "Rdiff League Rank": Number,
+    "Rdiff MLB Rank": Number
 });
 
 

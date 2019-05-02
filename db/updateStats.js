@@ -18,6 +18,11 @@ const divisions = {
 }
 
 pitchingStats = getRankings(pitchingStats, ["ERA", "SV", "SO", "AVG"]);
+standingsStats = getRankings(standingsStats, ["W", "W-L%", "R", "RA", "Rdiff"]);
+hittingStats = getRankings(hittingStats, ["R","AVG", "HR", "SO", "OBP", "SB", "SLG", "OPS"]);
+feildingStats = getRankings(feildingStats, ["E", "FPCT"]);
+
+
 function updatePitching() {
     pitchingStats.forEach(team => {
         Pitching.findOneAndUpdate({ "Team" : team["Team"]}, {
@@ -73,7 +78,23 @@ function updateHitting() {
             "AVG": team["AVG"],
             "OBP": team["OBP"],
             "SLG": team["SLG"],
-            "OPS": team["OPS"]
+            "OPS": team["OPS"],
+            "R League Rank" : team["R League Rank"],
+            "R MLB Rank" : team["R MLB Rank"],
+            "AVG MLB Rank": team["AVG MLB Rank"],
+            "AVG League Rank": team["AVG League Rank"], 
+            "HR MLB Rank": team["HR MLB Rank"],
+            "HR League Rank": team["HR League Rank"],
+            "SO MLB Rank": team["SO MLB Rank"],
+            "SO League Rank" : team["SO League Rank"],
+            "OBP MLB Rank": team["OBP MLB Rank"],
+            "OBP League Rank": team["OBP League Rank"],
+            "SB League Rank": team["OBP League Rank"],
+            "SB MLB Rank": team["SB MLB Rank"],
+            "SLG MLB Rank": team["SLG MLB Rank"],
+            "SLG League Rank": team["SLG League Rank"],
+            "OPS League Rank": team["OPS League Rank"],
+            "OPS MLB Rank": team["OPS MLB Rank"]
         }, {upsert: true}).exec()
     });
 }
@@ -98,7 +119,11 @@ function updateFeilding() {
             "PB": team["PB"],
             "C_WP": team["C_WP"],
             "FPCT": team["FPCT"],
-            "DER": team["DER"]
+            "DER": team["DER"],
+            "E MLB Rank" : team["E MLB Rank"],
+            "E League Rank" : team["E League Rank"],
+            "FPCT League Rank" : team["FPCT League Rank"],
+            "FCPT MLB Rank" : team["FPCT MLB Rank"]
         }, {upsert : true}).exec()
     })
 }
@@ -122,7 +147,17 @@ function updateStandings() {
             "Road": team["Road"],
             "last10": team["last10"],
             "last20": team["last20"],
-            "last30": team["last30"]
+            "last30": team["last30"],
+            "W League Rank" : team["W League Rank"],
+            "W MLB Rank": team["W MLB Rank"],
+            "W-L% MLB Rank": team["W-L% MLB Rank"],
+            "W-L% League Rank": team["W-L% League Rank"],
+            "R League Rank": team["R League Rank"],
+            "R MLB Rank": team["R MLB Rank"],
+            "RA MLB Rank": team["RA MLB Rank"],
+            "RA League Rank": team["RA League Rank"],
+            "Rdiff League Rank": team["Rdiff League Rank"],
+            "Rdiff MLB Rank": team["Rdiff MLB Rank"],
         }, {upsert : true}).exec();
     })
 }
@@ -182,6 +217,3 @@ updateData = async() => {
 module.exports.updateData = updateData;
 updateData();
 
-// const standingRankings = getRankings(standingsStats, ["W", "W-L%", "R", "RA", "Rdiff"]);
-// const hittingRankings = getRankings(hittingStats, ["AB", "R", "H", "AVG", "2B", "HR", "SO", "BB", "OBP", "SB", "RBI", "SLG", "OPS"]);
-// const feildingRankings = getRankings(feildingStats, ["E", "FPCT"]);
