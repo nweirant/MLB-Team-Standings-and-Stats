@@ -18,10 +18,10 @@ export default class TeamSummary extends React.Component {
         .then(data => {
             this.setState({hitting: data.data});
         })
-        // .then(axios.get(`/api/${this.props/activeTeam}/pitching`)
-        // .then(data => {
-        //     this.setState({pitching : data})
-        // }))
+        axios.get(`/api/${this.props/activeTeam}/pitching`)
+        .then(data => {
+             this.setState({pitching : data})
+        })
     }
 
     componentDidMount() {
@@ -31,7 +31,7 @@ export default class TeamSummary extends React.Component {
     render() {
         return (
             <div>
-                SUMMARY
+                {this.props.activeTeam}
             </div>
         )
     }

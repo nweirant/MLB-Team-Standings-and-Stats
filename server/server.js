@@ -61,6 +61,28 @@ app.get('/api/leauge/:league/:stat', (req,res) => {
     })
 });
 
+app.get('/api/rankings/:league/:stat/:subStat', (req,res) => {
+    let stat = req.params.stat;
+    let league = req.params.league;
+    let subStat = req.params.subStat;
+
+    getLeagueStats(league, stat)
+    .then(data => {
+        function compare(a,b) {
+            if (a.stat < b.stat) {
+                return 1;
+            }
+            if (a.stat > b.stat) {
+                return -1;
+            }
+            return 0;
+         }
+
+        data.sort(compare);
+        res.send(data);
+    })
+});
+
 app.get('/api/division/:division/:stat' , (req,res) => {
     getDivisionStats(req.params.division, req.params.stat)
     .then(data => {

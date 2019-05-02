@@ -118,6 +118,54 @@ function updateStandings() {
     })
 }
 
+
+function standingsRankings() {
+    let AL = standingsStats.filter(team => team.Lg === 'AL');
+    let NL = standingsStats.filter(team => team.Lg === 'NL');
+
+    let sortableStats = ["W", "W-L%", "R", "RA", "Rdiff"];
+
+    let ALsortedStats = [];
+    let NLsortedStats = [];
+    let result = [];
+
+    sortableStats.forEach(stat => {
+        let comp = compareStat(stat);
+        ALsortedStats = AL.sort(comp);
+        NLsortedStats = NL.sort(comp);
+
+        ALsortedStats.forEach( (team, i) => {
+            let id = stat + ' AL rank';
+                team[id] = i + 1;
+        })
+        NLsortedStats.forEach( (team, i) => {
+            let id = stat + ' NL rank';
+                team[id] = i + 1;
+        })
+
+        result = ALsortedStats.concat(NLsortedStats);
+        result = result.sort(comp);
+        result.forEach( (team, i) => {
+            let id = stat + ' MLB rank';
+                team[id] = i + 1;
+        })
+    })
+    function compareStat(stat) {
+        function compare(a,b) {
+            if (a[stat] < b[stat]) {
+                return 1;
+            }
+            if (a[stat] > b[stat]) {
+                return -1;
+            }
+            return 0;
+        }
+        return compare;
+    }
+
+   console.log(result);
+}
+
 updateData = async() => {
     await updatePitching();
     await updateHitting();
@@ -126,4 +174,8 @@ updateData = async() => {
     console.log('updated!');
 }
 module.exports.updateData = updateData;
-updateData();
+//updateData();
+
+standingsRankings();
+
+

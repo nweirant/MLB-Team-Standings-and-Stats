@@ -25,7 +25,8 @@ export default class Standings extends React.Component {
             this.setState({allTeams : data.data}, () => {
                 this.sortDivisions(data.data);
             });
-        })        
+        });
+                
     }
 
     getActiveTeam (e) {
@@ -95,6 +96,7 @@ export default class Standings extends React.Component {
                         <th>Win%</th>
                         <th>Streak</th>
                         <th>Last 10</th>
+                        <th>Run Diff.</th>
 
 
                     </tr>
@@ -106,6 +108,7 @@ export default class Standings extends React.Component {
                                 <td>{team["W-L%"]}</td>
                                 <td>{team.Strk}</td>
                                 <td>{team.last10}</td>
+                                <td>{team.Rdiff}</td>
 
                             </tr>
 
@@ -123,6 +126,7 @@ export default class Standings extends React.Component {
                         <th>Win%</th>
                         <th>Streak</th>
                         <th>Last 10</th>
+                        <th>Run Diff.</th>
 
                     </tr>
                         {this.state.al_west.map(team => (     
@@ -133,6 +137,7 @@ export default class Standings extends React.Component {
                                 <td>{team["W-L%"]}</td>
                                 <td>{team.Strk}</td>
                                 <td>{team.last10}</td>
+                                <td>{team.Rdiff}</td>
 
                             </tr>
 
@@ -151,6 +156,7 @@ export default class Standings extends React.Component {
                         <th>Win%</th>
                         <th>Streak</th>
                         <th>Last 10</th>
+                        <th>Run Diff.</th>
 
                     </tr>
                         {this.state.al_central.map(team => (     
@@ -161,7 +167,7 @@ export default class Standings extends React.Component {
                                 <td>{team["W-L%"]}</td>
                                 <td>{team.Strk}</td>
                                 <td>{team.last10}</td>
-
+                                <td>{team.Rdiff}</td>
 
                             </tr>
 
@@ -178,6 +184,7 @@ export default class Standings extends React.Component {
                         <th>Win%</th>
                         <th>Streak</th>
                         <th>Last 10</th>
+                        <th>Run Diff.</th>
 
                     </tr>
                         {this.state.nl_east.map(team => (     
@@ -188,6 +195,7 @@ export default class Standings extends React.Component {
                                 <td>{team["W-L%"]}</td>
                                 <td>{team.Strk}</td>
                                 <td>{team.last10}</td>
+                                <td>{team.Rdiff}</td>
 
                             </tr>
 
@@ -204,6 +212,7 @@ export default class Standings extends React.Component {
                         <th>Win%</th>
                         <th>Streak</th>
                         <th>Last 10</th>
+                        <th>Run Diff.</th>
 
                     </tr>
                         {this.state.nl_west.map(team => (     
@@ -214,7 +223,7 @@ export default class Standings extends React.Component {
                                 <td>{team["W-L%"]}</td>
                                 <td>{team.Strk}</td>
                                 <td>{team.last10}</td>
-
+                                <td>{team.Rdiff}</td>
 
                             </tr>
 
@@ -231,6 +240,7 @@ export default class Standings extends React.Component {
                         <th>Win%</th>
                         <th>Streak</th>
                         <th>Last 10</th>
+                        <th>Run Diff.</th>
 
                     </tr>
                         {this.state.nl_central.map(team => (     
@@ -241,6 +251,7 @@ export default class Standings extends React.Component {
                                 <td>{team["W-L%"]}</td>
                                 <td>{team.Strk}</td>
                                 <td>{team.last10}</td>
+                                <td>{team.Rdiff}</td>
 
                             </tr>
 
