@@ -200,7 +200,7 @@ module.exports.getTeamStat = (team, statType) => {
         'PHI' : 'Philadelphia Phillies',  'ATL' : 'Atlanta Braves',  'NYM' : 'New York Mets',  'WSN' : 'Washington Nationals', 'MIA' : 'Miami Marlins',
         'MIL' : 'Milwaukee Brewers',  'STL' : 'St. Louis Cardinals',  'PIT' : 'Pittsburgh Pirates',  'CHC' : 'Chicago Cubs', 'CIN' : 'Cincinnati Reds',
         'SDP' : 'San Diego Padres',  'LAD' : 'Los Angeles Dodgers', 'ARI' : 'Arizona Diamondbacks', 'SFG' : 'San Francisco Giants',  'COL' : 'Colorado Rockies',
-        'MIN' : 'Minnesota Twins',  'CLE' : 'Cleveland Indians', 'DET' : 'Detroit Tigers', 'CHW' : 'Chicago Whitesox', 'KCR' :'Kansas City Royals'
+        'MIN' : 'Minnesota Twins',  'CLE' : 'Cleveland Indians', 'DET' : 'Detroit Tigers', 'CHW' : 'Chicago White Sox', 'KCR' :'Kansas City Royals'
     }
     let abbr = team.toUpperCase();
     if (teamAbbr[abbr]) {
@@ -212,7 +212,7 @@ module.exports.getTeamStat = (team, statType) => {
     else if (statType === "hitting") {
         return Hitting.findOne({"Team" : team}).exec();
     }
-    else if (statType === "fielding") {
+    else if (statType === "feilding") {
         return Feilding.findOne({"Team" : team}).exec();
     }
     else if (statType === "standings") {

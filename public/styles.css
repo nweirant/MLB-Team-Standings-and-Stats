@@ -7,7 +7,7 @@ table {
 	display: flex; /* nav bar!*/
 	flex-direction: column;
 	justify-content: flex-start;
-	/* width: 50%; */
+	width: 99%;
 	/* align-items: flex-start; */
 }
 
@@ -20,7 +20,7 @@ table {
 
 th, tr, td {
 	display: flex;
-	flex: 0 0 10%;
+	flex: 0 0 6%;
 } 
 
 

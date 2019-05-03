@@ -51,7 +51,7 @@ app.get('/api/:team/:stat', (req,res) => {
 
 })
 
-app.get('/api/leauge/:league/:stat', (req,res) => {
+app.get('/api/league/:league/:stat', (req,res) => {
     let stat = req.params.stat;
     let league = req.params.league;
 
