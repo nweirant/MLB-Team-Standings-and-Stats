@@ -41,30 +41,24 @@ app.get('/api/allStandings', (req,res) => {
 app.get('/api/:team/:stat', (req,res) => {
     let stat = req.params.stat;
     let team = req.params.team
-
-  
     getTeamStat(team,stat)
     .then(data => {
         res.send(data);
     })
-    
-
 })
 
 app.get('/api/league/:league/:stat', (req,res) => {
     let stat = req.params.stat;
     let league = req.params.league;
-
     getLeagueStats(league, stat)
     .then(data => {
         res.send(data);
     })
 });
 
-app.get('/api/rankings/:league/:stat/:subStat', (req,res) => {
+app.get('/api/rankings/:league/:stat', (req,res) => {
     let stat = req.params.stat;
     let league = req.params.league;
-    let subStat = req.params.subStat;
 
     getLeagueStats(league, stat)
     .then(data => {
