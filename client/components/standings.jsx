@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import TeamSummary from './teamSummary.jsx';
+import DivisionStandings from './divisionStandings.jsx';
 
 export default class Standings extends React.Component {
     constructor(props) {
@@ -13,10 +14,14 @@ export default class Standings extends React.Component {
             nl_east : [],
             nl_central : [],
             nl_west : [],
-            activeTeam : 'NYY'
+            activeTeam : 'NYY',
+            activeLeague: '',
+            activeDivison: []
         }
 
         this.getActiveTeam = this.getActiveTeam.bind(this);
+        this.selectDivison = this.selectDivison.bind(this);
+        this.selectLeague = this.selectLeague.bind(this);
     }
 
     getData() {
@@ -64,8 +69,6 @@ export default class Standings extends React.Component {
             }
         });
 
-        
-    
         this.setState({
             al_central : al_Central,
             al_west : al_West,
@@ -73,7 +76,18 @@ export default class Standings extends React.Component {
             nl_central : nl_Central,
             nl_west : nl_West,
             nl_east : nl_East,
+            activeDivison : al_East
         });
+    }
+
+    selectLeague(e) {
+        this.setState({activeLeague : e.target.value});
+    }
+
+    selectDivison(e) {
+        let division = this.state[e.target.value].slice();
+        this.setState({activeDivison : division});
+
     }
 
     componentDidMount() {
@@ -83,214 +97,33 @@ export default class Standings extends React.Component {
     render() {
         return(
             <div>
-                <div>
+                <div className="league-buttons">
+                    <button type="button" value="AL" onClick={this.selectLeague}>AL</button>
+                    <button type="button" value="NL" onClick={this.selectLeague}>NL</button>
+                </div>
+
+                <div className="division-buttons">
+                    {this.state.activeLeague === 'AL' ? 
+                    <div className="al-division-buttons"> 
+                        <button type="button" value="al_central" onClick={this.selectDivison} >Central</button>
+                        <button type="button" value="al_east" onClick={this.selectDivison}>East</button>
+                        <button type="button" value="al_west" onClick={this.selectDivison}>West</button>
+
+                    </div>
+                    :
+                    <div className="al-division-buttons">
+                        <button type="button" value="nl_central" onClick={this.selectDivison}>Central</button>
+                        <button type="button" value="nl_east" onClick={this.selectDivison}>East</button>
+                        <button type="button" value="nl_west" onClick={this.selectDivison}>West</button>
+
+                    </div>
+                    }
+                </div>
+
+
+                    <DivisionStandings division={this.state.activeDivison} activeTeam={this.getActiveTeam} />
                     <TeamSummary activeTeam={this.state.activeTeam} />
-                </div>
-                <div>
-                    <h4>AL EAST</h4>
-                    <table className="al-table">
-                    <tr>
-                        <th>Team</th>
-                        <th>W</th>
-                        <th>L</th>
-                        <th>Win%</th>
-                        <th>AL Rank</th>
-                        <th>MLB Rank</th>
-                        <th>Streak</th>
-                        <th>Last 10</th>
-                        <th>Run Diff.</th>
-                        
-
-
-
-                    </tr>
-                        {this.state.al_east.map(team => (     
-                            <tr>
-                                <td onClick={this.getActiveTeam}>{team.Tm}</td>
-                                <td>{team.W}</td>
-                                <td>{team.L}</td>
-                                <td>{team["W-L%"]}</td>
-                                <td>{team["W-L% League Rank"]}</td>
-                                <td>{team["W-L% MLB Rank"]}</td>
-                                <td>{team.Strk}</td>
-                                <td>{team.last10}</td>
-                                <td>{team.Rdiff}</td>
-
-                            </tr>
-
-                        ))}
-                     </table>
-                </div>
-
-                <div>
-                    <h4>AL WEST</h4>
-                    <table className="al-table">
-                    <tr>
-                        <th>Team</th>
-                        <th>W</th>
-                        <th>L</th>
-                        <th>Win%</th>
-                        <th>AL Rank</th>
-                        <th>MLB Rank</th>
-                        <th>Streak</th>
-                        <th>Last 10</th>
-                        <th>Run Diff.</th>
-
-
-                    </tr>
-                        {this.state.al_west.map(team => (     
-                            <tr>
-                                <td onClick={this.getActiveTeam}>{team.Tm}</td>
-                                <td>{team.W}</td>
-                                <td>{team.L}</td>
-                                <td>{team["W-L%"]}</td>
-                                <td>{team["W-L% League Rank"]}</td>
-                                <td>{team["W-L% MLB Rank"]}</td>
-                                <td>{team.Strk}</td>
-                                <td>{team.last10}</td>
-                                <td>{team.Rdiff}</td>
-
-                            </tr>
-
-                        ))}
-                     </table>
-
-                </div>
-
-                <div>
-                    <h4>AL CENTRAL</h4>
-                    <table className="al-table">
-                    <tr>
-                        <th>Team</th>
-                        <th>W</th>
-                        <th>L</th>
-                        <th>Win%</th>
-                        <th>AL Rank</th>
-                        <th>MLB Rank</th>
-                        <th>Streak</th>
-                        <th>Last 10</th>
-                        <th>Run Diff.</th>
-  
-
-                    </tr>
-                        {this.state.al_central.map(team => (     
-                            <tr>
-                                <td onClick={this.getActiveTeam}>{team.Tm}</td>
-                                <td>{team.W}</td>
-                                <td>{team.L}</td>
-                                <td>{team["W-L%"]}</td>
-                                <td>{team["W-L% League Rank"]}</td>
-                                <td>{team["W-L% MLB Rank"]}</td>
-                                <td>{team.Strk}</td>
-                                <td>{team.last10}</td>
-                                <td>{team.Rdiff}</td>
-
-                            </tr>
-
-                        ))}
-                     </table>
-                </div>
-                <div>
-                    <h4>NL EAST</h4>
-                    <table className="nl-table">
-                    <tr>
-                        <th>Team</th>
-                        <th>W</th>
-                        <th>L</th>
-                        <th>Win%</th>
-                        <th>NL Rank</th>
-                        <th>MLB Rank</th>
-                        <th>Streak</th>
-                        <th>Last 10</th>
-                        <th>Run Diff.</th>
-       
-
-
-                    </tr>
-                        {this.state.nl_east.map(team => (     
-                            <tr>
-                                <td onClick={this.getActiveTeam}>{team.Tm}</td>
-                                <td>{team.W}</td>
-                                <td>{team.L}</td>
-                                <td>{team["W-L%"]}</td>
-                                <td>{team["W-L% League Rank"]}</td>
-                                <td>{team["W-L% MLB Rank"]}</td>
-                                <td>{team.Strk}</td>
-                                <td>{team.last10}</td>
-                                <td>{team.Rdiff}</td>
-
-                            </tr>
-
-                        ))}
-                     </table>
-                </div>
-                <div>
-                    <h4>NL WEST</h4>
-                    <table className="nl-table">
-                    <tr>
-                        <th>Team</th>
-                        <th>W</th>
-                        <th>L</th>
-                        <th>Win%</th>
-                        <th>NL Rank</th>
-                        <th>MLB Rank</th>
-                        <th>Streak</th>
-                        <th>Last 10</th>
-                        <th>Run Diff.</th>
-            
-
-
-                    </tr>
-                        {this.state.nl_west.map(team => (     
-                            <tr>
-                                <td onClick={this.getActiveTeam}>{team.Tm}</td>
-                                <td>{team.W}</td>
-                                <td>{team.L}</td>
-                                <td>{team["W-L%"]}</td>
-                                <td>{team["W-L% League Rank"]}</td>
-                                <td>{team["W-L% MLB Rank"]}</td>
-                                <td>{team.Strk}</td>
-                                <td>{team.last10}</td>
-                                <td>{team.Rdiff}</td>
-
-                            </tr>
-
-                        ))}
-                     </table>
-                </div>
-                <div>
-                    <h4>NL CENTRAL</h4>
-                    <table className="nl-table">
-                    <tr>
-                        <th>Team</th>
-                        <th>W</th>
-                        <th>L</th>
-                        <th>Win%</th>
-                        <th>NL Rank</th>
-                        <th>MLB Rank</th>
-                        <th>Streak</th>
-                        <th>Last 10</th>
-                        <th>Run Diff.</th>
-                        
-
-                    </tr>
-                        {this.state.nl_central.map(team => (     
-                            <tr>
-                                <td onClick={this.getActiveTeam}>{team.Tm}</td>
-                                <td>{team.W}</td>
-                                <td>{team.L}</td>
-                                <td>{team["W-L%"]}</td>
-                                <td>{team["W-L% League Rank"]}</td>
-                                <td>{team["W-L% MLB Rank"]}</td>
-                                <td>{team.Strk}</td>
-                                <td>{team.last10}</td>
-                                <td>{team.Rdiff}</td>
-
-                            </tr>
-
-                        ))}
-                     </table>
-                </div>
+                
             </div>
         )
     }
