@@ -76,7 +76,8 @@ export default class Standings extends React.Component {
             nl_central : nl_Central,
             nl_west : nl_West,
             nl_east : nl_East,
-            activeDivison : al_East
+            activeDivison : al_East,
+            activeLeague : 'AL'
         });
     }
 
@@ -121,7 +122,7 @@ export default class Standings extends React.Component {
                 </div>
 
 
-                    <DivisionStandings division={this.state.activeDivison} activeTeam={this.getActiveTeam} />
+                    <DivisionStandings division={this.state.activeDivison} activeTeam={this.getActiveTeam} league={this.state.activeLeague} />
                     <TeamSummary activeTeam={this.state.activeTeam} />
                 
             </div>

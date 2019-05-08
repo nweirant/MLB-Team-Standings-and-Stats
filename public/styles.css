@@ -2,7 +2,7 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-.al-table, .nl-table {
+.AL-table, .NL-table {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
@@ -13,10 +13,10 @@ body {
 	/* align-items: flex-start; */
 }
 
-.al-table {
+.AL-table {
 	border: 1px solid red;
 }
-.nl-table {
+.NL-table {
 	border: 1px solid blue;
 }
 
@@ -34,7 +34,7 @@ body {
 
 th, tr, td {
 	display: flex;
-	flex: 0 0 11%;
+	flex: 0 0 7%;
 } 
 
 

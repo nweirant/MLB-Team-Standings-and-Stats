@@ -5,10 +5,11 @@ export default class DivisionStandings extends React.Component {
         super(props)
     }
 
+
     render() {
         return (
             <div>
-                <table>
+                <table className={this.props.league + '-table'}>
                     <tr>
                         <th>Team</th>
                         <th>W</th>
