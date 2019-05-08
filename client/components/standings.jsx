@@ -16,7 +16,8 @@ export default class Standings extends React.Component {
             nl_west : [],
             activeTeam : 'NYY',
             activeLeague: '',
-            activeDivison: []
+            activeDivison: [],
+            activeDivisonName : 'East'
         }
 
         this.getActiveTeam = this.getActiveTeam.bind(this);
@@ -82,12 +83,18 @@ export default class Standings extends React.Component {
     }
 
     selectLeague(e) {
-        this.setState({activeLeague : e.target.value});
+        this.setState({activeLeague : e.target.value}, () => {
+            let divName = this.state.activeDivisonName.toLowerCase();
+            let leagueName = this.state.activeLeague.toLowerCase();
+            let newActive = leagueName + '_' + divName;
+            this.setState({activeDivison : this.state[newActive]}); 
+        });
     }
 
     selectDivison(e) {
         let division = this.state[e.target.value].slice();
-        this.setState({activeDivison : division});
+        let name = e.target.innerHTML;
+        this.setState({activeDivison : division, activeDivisonName : name});
 
     }
 
@@ -122,7 +129,7 @@ export default class Standings extends React.Component {
                 </div>
 
 
-                    <DivisionStandings division={this.state.activeDivison} activeTeam={this.getActiveTeam} league={this.state.activeLeague} />
+                    <DivisionStandings divison={this.state.activeDivison} activeTeam={this.getActiveTeam} league={this.state.activeLeague} />
                     <TeamSummary activeTeam={this.state.activeTeam} />
                 
             </div>

@@ -22,7 +22,7 @@ export default class DivisionStandings extends React.Component {
                         <th>Run Diff.</th>
                         
                     </tr>
-                        {this.props.division.map(team => (     
+                        {this.props.divison.map(team => (     
                             <tr>
                                 <td onClick={this.props.activeTeam}>{team.Tm}</td>
                                 <td>{team.W}</td>
